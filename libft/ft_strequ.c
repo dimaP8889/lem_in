@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/07 13:33:15 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/07 13:33:16 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "./includes/libft.h"
 
-int		main()
+int		ft_strequ(char const *s1, char const *s2)
 {
-	t_lem	*in;
-	int		fd;
-
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	if (s1 && s2)
+		return ((ft_strcmp(s1, s2)) ? 0 : 1);
+	return (0);
 }

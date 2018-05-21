@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/01 06:41:51 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/01 06:41:52 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-
-int		main()
+char	*ft_strcat(char *s1, const char *s2)
 {
-	t_lem	*in;
-	int		fd;
+	char			*str;
 
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	str = s1;
+	while (*s1)
+		s1++;
+	while (*s2)
+		*(s1++) = *(s2++);
+	*s1 = '\0';
+	return (str);
 }

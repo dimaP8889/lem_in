@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/02 17:12:28 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/02 17:12:29 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "./includes/libft.h"
 
-int		main()
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_lem	*in;
-	int		fd;
+	char	*str;
+	char	*str1;
 
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	str = (char *)b;
+	str1 = str;
+	while (len-- > 0)
+		*(str++) = c;
+	return (str1);
 }

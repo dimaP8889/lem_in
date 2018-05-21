@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/01 07:17:05 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/01 07:17:05 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-
-int		main()
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	t_lem	*in;
-	int		fd;
-
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	while (*s1 == *s2 && *s1)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

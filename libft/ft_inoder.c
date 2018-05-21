@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_inoder.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/16 01:16:53 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/16 01:16:54 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "./includes/libft.h"
 
-int		main()
+void	ft_inoder(t_btree *tree, void (*f)(void *))
 {
-	t_lem	*in;
-	int		fd;
-
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	if (!tree || !f)
+		return ;
+	if (tree->left)
+		ft_inoder(tree->left, f);
+	f(tree->data);
+	if (tree->right)
+		ft_inoder(tree->right, f);
 }

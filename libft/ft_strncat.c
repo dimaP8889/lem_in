@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 19:02:03 by dpogrebn         ###   ########.fr       */
+/*   Created: 2017/11/01 06:45:14 by dpogrebn          #+#    #+#             */
+/*   Updated: 2017/11/01 06:45:14 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "./includes/libft.h"
 
-int		main()
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	t_lem	*in;
-	int		fd;
+	int				index;
+	char			*str;
 
-	in = (t_lem *)malloc(sizeof(t_lem));
-	fd = open("read", O_RDONLY);
-	ft_valid(in, fd);
+	str = s1;
+	index = 0;
+	while (*s1)
+		s1++;
+	while (*s2 && n-- > 0)
+		*(s1++) = *(s2++);
+	*s1 = '\0';
+	return (str);
 }
