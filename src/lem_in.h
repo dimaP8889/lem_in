@@ -6,7 +6,7 @@
 /*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/21 18:49:21 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/05/23 18:19:24 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef	struct		s_room
 typedef	struct		s_lem
 {
 	int				num_ants;
+	int				start;
+	int				fin;
 	t_room			*room;
 }					t_lem;
 
