@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/24 18:47:39 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/05/27 09:23:37 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ typedef	struct		s_lem
 }					t_lem;
 
 void	ft_valid(t_lem *in, int fd);
+void	ft_make_links(t_room **mass_rooms, int fd, char *str);
+void	ft_exit();
 
 #endif

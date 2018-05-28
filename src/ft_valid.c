@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/24 19:14:58 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/05/27 10:31:14 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,15 @@ t_room	*ft_find_end(char **str, int fd, t_room *room)
 
 }
 
-t_room	*ft_check_rooms(t_room *room, int fd)
+t_room	*ft_check_rooms(t_room *room, int fd, char **str)
 {
-	char	*str;
 	t_room 	*rooms;
 
 	room = (t_room *)malloc(sizeof(t_room));
 	rooms = room;
-	get_next_line(fd, &str);
-	while (!ft_strstr(str, "-"))
-		room = ft_find_end(&str, fd, room);
+	get_next_line(fd, str);
+	while (!ft_strstr(*str, "-"))
+		room = ft_find_end(str, fd, room);
 	room->next = NULL;
 	return (rooms);
 }
@@ -153,13 +152,15 @@ void	ft_valid(t_lem *in, int fd)
 	t_lem 	*lol;
 	t_room	**mass_rooms;
 	int		coun;
+	char	*str;
 
+	str = NULL;
 	coun = 0;
 	lol = in;
 	ft_check_num(lol, fd);
-	lol->room = ft_check_rooms(lol->room, fd);
-	mass_rooms = (t_room **)malloc(sizeof(t_room *) * ft_count_links(lol->room) + 1);
-	while (in->room)
+	lol->room = ft_check_rooms(lol->room, fd, &str);
+	mass_rooms = (t_room **)malloc(sizeof(t_room *) * ft_count_links(lol->room));
+	while (in->room->next)
 	{
 		mass_rooms[coun] = in->room;
 		in->room = in->room->next;
@@ -172,6 +173,7 @@ void	ft_valid(t_lem *in, int fd)
 		mass_rooms[coun]->next = NULL;
 		coun++;
 	}
+	ft_make_links(mass_rooms, fd, str);
 	coun = 0;
 	while (mass_rooms[coun])
 	{
@@ -180,7 +182,6 @@ void	ft_valid(t_lem *in, int fd)
 		ft_printf("y: %i ", mass_rooms[coun]->y);
 		ft_printf("start: %i ", mass_rooms[coun]->start);
 		ft_printf("fin: %i \n", mass_rooms[coun]->fin);
-		//ft_printf("%s\n", mass_rooms[coun]->next->name);
 		coun++;
 	}
 }
