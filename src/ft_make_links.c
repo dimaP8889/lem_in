@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_links.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/05/28 13:21:25 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/05/28 21:11:17 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,34 @@ char	*ft_find_first(char *str)
 	return (ret);
 }
 
-t_room	*ft_link(t_room **mass_rooms, char *name)
+t_room	*ft_link(t_room *room, t_room **mass_rooms, char *name)
 {
 	int	count;
+	t_room *room_cp;
+	t_room **mass_cp;
 
+	room_cp = room;
+	mass_cp = mass_rooms;
 	count = 0;
+	// while (room)
+	// {
+	// 	room = room->next;
+	// }
+	//room = (t_room *)malloc(sizeof(t_room));
+	//count = 0;
 	while (mass_rooms[count])
 	{
-		if (ft_strcmp(mass_rooms[count]->name, name))
+		ft_printf("try find : %s ", mass_rooms[count]->name);
+		if (!ft_strcmp(mass_rooms[count]->name, name))
+		{
+			//room = mass_rooms[count];
+			// while (room_cp)
+			// {
+			// 	ft_printf("name b: %s ", room_cp->name);
+			// 	room_cp = room_cp->next;
+			// }
 			return (mass_rooms[count]);
+		}
 		count++;
 	}
 	return (NULL);
@@ -85,21 +104,18 @@ void	ft_connect(t_room **mass_rooms, char *str)
 	cp_rooms = mass_rooms;
 	f_name = ft_find_first(str);
 	s_name = ft_find_second(str);
-	ft_printf("%s\n", f_name);
-	ft_printf("%s\n", s_name);
+	//mass_rooms[1]->name = "LOL";
 	while (mass_rooms[count])
 	{
-		if (ft_strcmp(mass_rooms[count]->name, f_name))
+		ft_printf("name : %s ", mass_rooms[count]->name);
+		if (!ft_strcmp(mass_rooms[count]->name, f_name))
 		{
 			while (mass_rooms[count]->next)
-			{
 				mass_rooms[count] = mass_rooms[count]->next;
-			}
-			mass_rooms[count]->next = (t_room *)malloc(sizeof(t_room));
-			//mass_rooms[count] = mass_rooms[count]->next;
-			mass_rooms[count]->next = ft_link(cp_rooms, s_name);
-			mass_rooms[count]->next->next = NULL;
-			//mass_rooms[count]->next = NULL;
+			mass_rooms[count]->next = ft_link(mass_rooms[count], mass_rooms, s_name);
+			ft_printf("link : %s\n", mass_rooms[count]->name);
+			//cp_rooms[count]->next->next = NULL;
+			break ;
 		}
 		count++;
 	}
@@ -108,8 +124,10 @@ void	ft_connect(t_room **mass_rooms, char *str)
 void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 {
 	int end;
+	int	count;
 
 	end = 1;
+	count = 0;
 	while (end)
 	{
 		ft_check_valid_link(str);
@@ -117,6 +135,12 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 		end = get_next_line(fd, &str);
 	}
 
+	// while (mass_rooms[1])
+	// {
+	// 	//ft_printf("test\n");
+	// 	ft_printf("link :%s ", mass_rooms[1]->name);
+	// 	mass_rooms[1] = mass_rooms[1]->next;
+	// }
 	// while (get_next_line(fd, &str))
 	// {
 	// 	ft_printf("test");

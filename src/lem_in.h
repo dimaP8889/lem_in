@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/27 09:23:37 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/05/28 20:59:27 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include "../libft/includes/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 
+typedef	struct		s_name
+{
+	char			*name;
+}					t_name;
+
 typedef	struct		s_room
 {
 	char			*name;
@@ -26,6 +31,7 @@ typedef	struct		s_room
 	int				start;
 	int				fin;
 	struct s_room	*next;
+	struct s_name	*link;
 }					t_room;
 
 typedef	struct		s_lem

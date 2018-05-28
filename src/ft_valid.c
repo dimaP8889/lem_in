@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/27 10:31:14 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/05/28 21:06:18 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,17 +171,18 @@ void	ft_valid(t_lem *in, int fd)
 	while (mass_rooms[coun])
 	{
 		mass_rooms[coun]->next = NULL;
+		mass_rooms[coun]->link = NULL;
 		coun++;
 	}
 	ft_make_links(mass_rooms, fd, str);
 	coun = 0;
-	while (mass_rooms[coun])
-	{
-		ft_printf("%s ", mass_rooms[coun]->name);
-		ft_printf("x: %i ", mass_rooms[coun]->x);
-		ft_printf("y: %i ", mass_rooms[coun]->y);
-		ft_printf("start: %i ", mass_rooms[coun]->start);
-		ft_printf("fin: %i \n", mass_rooms[coun]->fin);
-		coun++;
-	}
+	// while (mass_rooms[coun])
+	// {
+	// 	ft_printf("%s ", mass_rooms[coun]->name);
+	// 	ft_printf("x: %i ", mass_rooms[coun]->x);
+	// 	ft_printf("y: %i ", mass_rooms[coun]->y);
+	// 	ft_printf("start: %i ", mass_rooms[coun]->start);
+	// 	ft_printf("fin: %i \n", mass_rooms[coun]->fin);
+	// 	coun++;
+	// }
 }
