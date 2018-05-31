@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/28 20:59:27 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/05/31 19:44:30 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,19 @@
 typedef	struct		s_name
 {
 	char			*name;
+	int				length;
+	int				num;
+	struct s_name	*next;
+	struct s_name	*prev;
 }					t_name;
+
+typedef	struct		s_links
+{
+	char			*f_name;
+	char			*s_name;
+	int				use;
+	struct s_links	*next;
+}					t_links;
 
 typedef	struct		s_room
 {
@@ -30,8 +42,9 @@ typedef	struct		s_room
 	int				free;
 	int				start;
 	int				fin;
-	struct s_room	*next;
-	struct s_name	*link;
+	int				length;
+	struct s_room	*next_room;
+	struct s_name	*name;
 }					t_room;
 
 typedef	struct		s_lem

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/28 21:06:18 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/05/31 19:48:50 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ void		ft_valid_room(char *str, int fd, t_room *room)
 t_room	*ft_find_end(char **str, int fd, t_room *room)
 {
 	ft_valid_room(*str, fd, room);
-	room->next = (t_room *)malloc(sizeof(t_room));
-	room = room->next;
+	room->next_room = (t_room *)malloc(sizeof(t_room));
+	room = room->next_room;
 	get_next_line(fd, str);
 	return (room);
 
@@ -116,7 +116,7 @@ t_room	*ft_check_rooms(t_room *room, int fd, char **str)
 	get_next_line(fd, str);
 	while (!ft_strstr(*str, "-"))
 		room = ft_find_end(str, fd, room);
-	room->next = NULL;
+	room->next_room = NULL;
 	return (rooms);
 }
 
@@ -127,7 +127,7 @@ int		ft_count_links(t_room *rooms)
 	count = 0;
 	while (rooms)
 	{
-		rooms = rooms->next;
+		rooms = rooms->next_room;
 		count++;
 	}
 	return (count);
@@ -160,18 +160,19 @@ void	ft_valid(t_lem *in, int fd)
 	ft_check_num(lol, fd);
 	lol->room = ft_check_rooms(lol->room, fd, &str);
 	mass_rooms = (t_room **)malloc(sizeof(t_room *) * ft_count_links(lol->room));
-	while (in->room->next)
+	while (in->room->next_room)
 	{
 		mass_rooms[coun] = in->room;
-		in->room = in->room->next;
+		in->room = in->room->next_room;
 		coun++;
 	}
 	mass_rooms[coun] = NULL;
 	coun = 0;
 	while (mass_rooms[coun])
 	{
-		mass_rooms[coun]->next = NULL;
-		mass_rooms[coun]->link = NULL;
+		mass_rooms[coun]->room = NULL;
+		mass_rooms[coun]->next_room = NULL;
+		//mass_rooms[coun]->link = NULL;
 		coun++;
 	}
 	ft_make_links(mass_rooms, fd, str);
