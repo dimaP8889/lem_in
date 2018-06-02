@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/31 19:44:30 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/02 15:47:56 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 
 typedef	struct		s_name
 {
-	char			*name;
+	int				name;
 	int				length;
 	int				num;
 	struct s_name	*next;
-	struct s_name	*prev;
 }					t_name;
 
 typedef	struct		s_links
@@ -44,7 +43,8 @@ typedef	struct		s_room
 	int				fin;
 	int				length;
 	struct s_room	*next_room;
-	struct s_name	*name;
+	struct s_name	*r_name;
+	struct s_name	*r_name_cp;
 }					t_room;
 
 typedef	struct		s_lem

@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/31 19:48:50 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/02 11:49:52 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	ft_valid(t_lem *in, int fd)
 	coun = 0;
 	while (mass_rooms[coun])
 	{
-		mass_rooms[coun]->room = NULL;
+		mass_rooms[coun]->r_name = NULL;
 		mass_rooms[coun]->next_room = NULL;
 		//mass_rooms[coun]->link = NULL;
 		coun++;
