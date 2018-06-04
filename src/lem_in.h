@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/03 13:47:07 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:51:09 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef	struct		s_links
 {
 	char			*f_name;
 	char			*s_name;
-	int				use;
 	struct s_links	*next;
 }					t_links;
 

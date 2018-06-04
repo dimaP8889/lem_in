@@ -6,11 +6,9 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/04 17:21:26 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/04 19:13:37 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// НАДО СДЕЛАТЬ НЕКСТ И ПРЕВ
 
 #include "lem_in.h"
 
@@ -52,34 +50,6 @@ char	*ft_find_first(char *str)
 	ret[i] = 0;
 	return (ret);
 }
-
-// t_room	*ft_link(t_room *room, t_room **mass_rooms, char *name)
-// {
-// 	int	count;
-// 	t_room *room_cp;
-// 	t_room **mass_cp;
-
-// 	room_cp = room;
-// 	mass_cp = mass_rooms;
-// 	count = 0;
-// 	while (mass_rooms[count])
-// 	{
-// 		ft_printf("try find : %s ", mass_rooms[count]->name);
-// 		if (!ft_strcmp(mass_rooms[count]->name, name))
-// 		{
-// 			// room->next = mass_rooms[count];
-// 			// //room->next = NULL;
-// 			// while (room_cp)
-// 			// {
-// 			// 	ft_printf("name b: %s ", room_cp->name);
-// 			// 	room_cp = room_cp->next;
-// 			// }
-// 			return (mass_rooms[count]);
-// 		}
-// 		count++;
-// 	}
-// 	return (NULL);
-// }
 
 char	*ft_find_second(char *str)
 {
@@ -125,7 +95,6 @@ t_name		*ft_make_r_name(t_name *r_name, int f_s)
 		r_name = r_name->next;
 	}
 	r_name->next = ft_make_first(f_s, 0);
-	//ft_printf("num : %i\n", r_name->num);
 	return (r_name_cp);
 }
 
@@ -134,29 +103,22 @@ void		ft_connect(t_room **mass_rooms_cp, t_links *links, int	count)
 	int	f_s;
 
 	t_room **mass_rooms;
-
 	f_s = 0;
 	mass_rooms = mass_rooms_cp;
 	while (mass_rooms[count])
 	{
-		//ft_printf("try find : %s \n", mass_rooms[count]->name);
 		if (!ft_strcmp(mass_rooms[count]->name, links->f_name))
 		{
-			//ft_printf("find : %s \n", links->f_name);
 			if (!mass_rooms[count]->r_name)
 				mass_rooms[count]->r_name = ft_make_first(count, 1);
 			while (mass_rooms[f_s])
 			{
 				if (!mass_rooms[f_s]->r_name)
 					mass_rooms[f_s]->r_name = ft_make_first(f_s, 1);
-				//ft_printf("try find second: %s \n", mass_rooms[f_s]->name);
 				if (!ft_strcmp(mass_rooms[f_s]->name, links->s_name))
 				{
-					//ft_printf("find sec: %s \n", links->s_name);
-					ft_printf("count: %i \n", f_s);
 					mass_rooms[count]->r_name = ft_make_r_name(mass_rooms[count]->r_name, f_s);
 					mass_rooms[f_s]->r_name = ft_make_r_name(mass_rooms[f_s]->r_name, count);
-					ft_printf("count_next: %i \n", mass_rooms[count]->r_name->num);
 				}
 				f_s++;
 			}
@@ -173,7 +135,6 @@ void	ft_linked(t_links *links, char *str)
 
 	f_name = ft_find_first(str);
 	s_name = ft_find_second(str);
-	links->use = 0;
 	links->f_name = ft_strdup(f_name);
 	links->s_name = ft_strdup(s_name);
 }
@@ -187,12 +148,42 @@ void	ft_print_links(t_links	*links)
 	}
 }
 
-void	ft_try_recurs(t_room **mass_rooms, t_links *links)
+void	ft_make_graph(t_room **mass_rooms, t_links *links)
 {
 	while (links)
 	{
 		ft_connect(mass_rooms, links, 0);
 		links = links->next;
+	}
+}
+
+int		ft_find_finish(t_room **mass_rooms)
+{
+	int		count;
+
+	count = 0;
+	while (!mass_rooms[count]->fin)
+		count++;
+	return (count);
+}
+
+void	ft_put_len(t_room **mass_rooms)
+{
+	int	count;
+	int	len;
+
+	len = 0;
+	count = ft_find_finish(mass_rooms);
+	if (mass_rooms[count]->r_name)
+		mass_rooms[count]->r_name = mass_rooms[count]->r_name->next;
+	while (1)
+	{
+		while (mass_rooms[count]->r_name)
+		{
+			mass_rooms[count]->r_name->length = len;
+			count ++;
+			len++;
+		}
 	}
 }
 
@@ -225,7 +216,8 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 	}
 	links->next = NULL; 
 
-	ft_try_recurs(mass_rooms_cp, links_cp);
+	ft_make_graph(mass_rooms_cp, links_cp);
+	//ft_put_len(mass_rooms_cp);
 
 	count = 0;
 	while (mass_rooms[count])
@@ -236,7 +228,7 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 			while (mass_rooms[count]->r_name)
 			{
 				ft_printf("num->next : %i\n", mass_rooms[count]->r_name->num);
-				//ft_printf("len->next : %i\n", mass_rooms[count]->r_name->length);
+				//ft_printf("name->next : %i\n", mass_rooms[count]->r_name->name);
 				mass_rooms[count]->r_name = mass_rooms[count]->r_name->next;
 			}
 		}
