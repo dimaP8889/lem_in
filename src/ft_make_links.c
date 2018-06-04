@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/02 15:51:28 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/03 21:25:19 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,68 +101,68 @@ t_name	*ft_make_first(int count, int name_r)
 	return (name);
 }
 
-int		ft_find_cont(char *name, t_room **mass_rooms)
-{
-	int	count;
+// int		ft_find_cont(char *name, t_room **mass_rooms)
+// {
+// 	int	count;
 
-	count = 0;
-	while (ft_strcmp(name, mass_rooms[count]->name))
-	{
-		if (!mass_rooms[count])
-			ft_exit();
-		count++;
-	}
-	return (count);
-}
+// 	count = 0;
+// 	while (ft_strcmp(name, mass_rooms[count]->name))
+// 	{
+// 		if (!mass_rooms[count])
+// 			ft_exit();
+// 		count++;
+// 	}
+// 	return (count);
+// }
 
-t_name		*ft_make_r_name(t_name *r_name, int count, int f_s)
-{
-	t_name *r_name_cp;
+// t_name		*ft_make_r_name(t_name *r_name, int f_s)
+// {
+// 	t_name *r_name_cp;
 
-	r_name_cp = r_name;
-	while (r_name->next)
-	{
-		if (count == 8)
-			ft_printf("%i\n", r_name->num);
-		ft_printf("check\n");
-		r_name = r_name->next;
-	}
-	r_name->next = ft_make_first(f_s, 0);
-	ft_printf("num : %i\n", r_name->num);
-	return (r_name_cp);
-}
+// 	r_name_cp = r_name;
+// 	while (r_name->next)
+// 	{
+// 		// if (count == 8)
+// 		// 	ft_printf("%i\n", r_name->num);
+// 		// ft_printf("check\n");
+// 		r_name = r_name->next;
+// 	}
+// 	r_name->next = ft_make_first(f_s, 0);
+// 	//ft_printf("num : %i\n", r_name->num);
+// 	return (r_name_cp);
+// }
 
-void		ft_connect(t_room **mass_rooms_cp, t_links *links, int	count)
-{
-	int	f_s;
+// void		ft_connect(t_room **mass_rooms_cp, t_links *links, int	count)
+// {
+// 	int	f_s;
 
-	t_room **mass_rooms;
+// 	t_room **mass_rooms;
 
-	f_s = 0;
-	mass_rooms = mass_rooms_cp;
-	while (mass_rooms[count])
-	{
-		ft_printf("try find : %s \n", mass_rooms[count]->name);
-		if (!ft_strcmp(mass_rooms[count]->name, links->f_name))
-		{
-			ft_printf("find : %s \n", links->f_name);
-			if (!mass_rooms[count]->r_name)
-				mass_rooms[count]->r_name = ft_make_first(count, 1);
-			while (mass_rooms[f_s])
-			{
-				ft_printf("try find second: %s \n", mass_rooms[f_s]->name);
-				if (!ft_strcmp(mass_rooms[f_s]->name, links->s_name))
-				{
-					ft_printf("find sec: %s \n", links->s_name);
-					mass_rooms[count]->r_name = ft_make_r_name(mass_rooms[count]->r_name, count, f_s);
-				}
-				f_s++;
-			}
-		}
-		f_s = 0;
-		count++;
-	}
-}
+// 	f_s = 0;
+// 	mass_rooms = mass_rooms_cp;
+// 	while (mass_rooms[count])
+// 	{
+// 		//ft_printf("try find : %s \n", mass_rooms[count]->name);
+// 		if (!ft_strcmp(mass_rooms[count]->name, links->f_name))
+// 		{
+// 			//ft_printf("find : %s \n", links->f_name);
+// 			if (!mass_rooms[count]->r_name)
+// 				mass_rooms[count]->r_name = ft_make_first(count, 1);
+// 			while (mass_rooms[f_s])
+// 			{
+// 				//ft_printf("try find second: %s \n", mass_rooms[f_s]->name);
+// 				if (!ft_strcmp(mass_rooms[f_s]->name, links->s_name))
+// 				{
+// 					//ft_printf("find sec: %s \n", links->s_name);
+// 					mass_rooms[count]->r_name = ft_make_r_name(mass_rooms[count]->r_name, f_s);
+// 				}
+// 				f_s++;
+// 			}
+// 		}
+// 		f_s = 0;
+// 		count++;
+// 	}
+// }
 
 void	ft_linked(t_links *links, char *str)
 {
@@ -176,20 +176,119 @@ void	ft_linked(t_links *links, char *str)
 	links->s_name = ft_strdup(s_name);
 }
 
-void	ft_print_links(t_links	*links)
+// void	ft_print_links(t_links	*links)
+// {
+// 	while (links)
+// 	{
+// 		ft_printf("lin_nm %s\n", links->f_name);
+// 		links = links->next;
+// 	}
+// }
+
+// void	ft_make_connect(t_room **mass_rooms, t_links *links)
+// {
+// 	while (links)
+// 	{
+// 		ft_connect(mass_rooms, links, 0);
+// 		links = links->next;
+// 	}
+// }
+
+t_name	*ft_make_f_next(t_links *links, t_room **mass_rooms, int count)
 {
-	while (links)
+	count = 0;
+	t_name *room;
+
+	while (mass_rooms[count])
 	{
-		ft_printf("lin_nm %s\n", links->f_name);
-		links = links->next;
+		if (!ft_strcmp(mass_rooms[count]->name, links->s_name))
+		{
+			room = ft_make_first(count, 0);
+		}
+		count++;
 	}
+	return (room);
 }
 
-void	ft_try_recurs(t_room **mass_rooms, t_links *links)
+t_name	*ft_make_s_next(t_links *links, t_room **mass_rooms, int count)
 {
+	count = 0;
+	t_name *room;
+
+	room = NULL;
+	while (mass_rooms[count])
+	{
+		if (!ft_strcmp(mass_rooms[count]->name, links->f_name))
+		{
+			room = ft_make_first(count, 0);
+		}
+		count++;
+	}
+	return (room);
+}
+
+void	ft_first_part(t_links *links, t_room **mass_rooms, int count)
+{
+	if (!mass_rooms[count]->r_name)
+	{
+		mass_rooms[count]->r_name = (t_name *)malloc(sizeof(t_name));
+		mass_rooms[count]->r_name->next = NULL;
+	}
+	else
+	{
+		while (mass_rooms[count]->r_name)
+			mass_rooms[count]->r_name = mass_rooms[count]->r_name->next;
+	}
+	mass_rooms[count]->r_name = ft_make_f_next(links, mass_rooms, count);
+}
+
+void	ft_second_part(t_links *links, t_room **mass_rooms, int count)
+{
+	if (!mass_rooms[count]->r_name)
+	{
+		mass_rooms[count]->r_name = (t_name *)malloc(sizeof(t_name));
+		mass_rooms[count]->r_name->next = NULL;
+	}
+	else
+	{
+		while (mass_rooms[count]->r_name)
+			mass_rooms[count]->r_name = mass_rooms[count]->r_name->next;
+	}
+	mass_rooms[count]->r_name = ft_make_s_next(links, mass_rooms, count);
+}
+
+int	ft_first_len(t_room **mass_rooms)
+{
+	int		count;
+
+	count = 0;
+	while (!mass_rooms[count]->fin)
+		count++;
+	mass_rooms[count]->r_name->length = 0;
+	return (count);
+}
+
+void	ft_make_len(t_links *links, t_room **mass_rooms_cp, int count)
+{
+	t_room 	**mass_rooms;
+	t_links *links_cp;
+
+	mass_rooms = mass_rooms_cp;
+	links_cp = links;
 	while (links)
 	{
-		ft_connect(mass_rooms, links, 0);
+		if (!ft_strcmp(mass_rooms[count]->name, links->f_name) && !links->use)
+		{
+			ft_first_part(links_cp, mass_rooms, count);
+			links->use = 1;
+			ft_make_len(links_cp, mass_rooms, mass_rooms[count]->r_name->num);
+		}
+		if (!ft_strcmp(mass_rooms[count]->name, links->s_name) && !links->use)
+		{
+			ft_second_part(links_cp, mass_rooms, count);
+			links->use = 1;
+			ft_make_len(links_cp, mass_rooms, mass_rooms[count]->r_name->num);
+		}
 		links = links->next;
 	}
 }
@@ -223,8 +322,9 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 	}
 	links->next = NULL; 
 
-	ft_try_recurs(mass_rooms_cp, links_cp);
-
+	//ft_make_connect(mass_rooms_cp, links_cp);
+	count = ft_first_len(mass_rooms_cp);
+	ft_make_len(links_cp, mass_rooms_cp, count);
 	count = 0;
 	while (mass_rooms[count])
 	{
@@ -234,7 +334,7 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 			while (mass_rooms[count]->r_name)
 			{
 				ft_printf("num->next : %i\n", mass_rooms[count]->r_name->num);
-				ft_printf("name->next : %i\n", mass_rooms[count]->r_name->name);
+				//ft_printf("name->next : %i\n", mass_rooms[count]->r_name->name);
 				//ft_printf("len->next : %i\n", mass_rooms[count]->r_name->length);
 				mass_rooms[count]->r_name = mass_rooms[count]->r_name->next;
 			}
