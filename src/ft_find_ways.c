@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_ways.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 10:28:50 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/06 12:34:37 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/06 20:46:33 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ void	ft_get_ways(t_room **mass_rooms, int count)
 	t_name *room;
 
 	room = mass_rooms[count]->r_name;
-	if (!room->use)
-	{
-		if (!room->next->use)
-			mass_rooms[count]->right_way = 0;
-		return;
-	}
 	while (room)
 	{
 		room->use = 0;

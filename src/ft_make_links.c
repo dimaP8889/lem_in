@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_links.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/06 13:30:29 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/06 20:42:52 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,6 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 	ft_make_graph(mass_rooms_cp, links_cp);
 	//ft_print_room(mass_rooms_cp);
 	ft_put_len(mass_rooms_cp);
-	ft_find_ways(mass_rooms_cp);
+	//ft_find_ways(mass_rooms_cp);
 	ft_print_room(mass_rooms);
 }
