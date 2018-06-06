@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/04 17:51:09 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/06 12:22:27 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 
 typedef	struct		s_name
 {
-	int				name;
-	int				length;
+	int				use;
 	int				num;
 	struct s_name	*next;
 }					t_name;
@@ -37,6 +36,7 @@ typedef	struct		s_room
 	char			*name;
 	int				x;
 	int				y;
+	int				right_way;
 	int				free;
 	int				start;
 	int				fin;
@@ -55,6 +55,9 @@ typedef	struct		s_lem
 
 void	ft_valid(t_lem *in, int fd);
 void	ft_make_links(t_room **mass_rooms, int fd, char *str);
+void	ft_put_len(t_room **mass_rooms_cp);
+void	ft_make_graph(t_room **mass_rooms, t_links *links);
+void	ft_find_ways(t_room **mass_rooms);
 void	ft_exit();
 
 #endif

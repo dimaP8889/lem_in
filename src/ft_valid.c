@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/02 11:49:52 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:29:49 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_comment(char **str, int fd, t_room *room)
 		(room)->start = 1;
 		get_next_line(fd, str);
 	}
-	else if ((room)->start != 1)
+	else
 		(room)->start = 0;
 	if (!ft_strcmp(*str, "##end"))
 	{
@@ -40,7 +40,7 @@ void	ft_comment(char **str, int fd, t_room *room)
 		(room)->fin = 1;
 		get_next_line(fd, str);
 	}
-	else if ((room)->fin != 1)
+	else
 		(room)->fin = 0;
 	if (start > 1|| fin > 1)
 		ft_exit();
@@ -83,6 +83,8 @@ void		ft_valid_room(char *str, int fd, t_room *room)
 {
 	char	**params;
 
+	room->fin = 0;
+	room->start = 0;
 	if (str[0] == '#')
 		ft_comment(&str, fd, room);
 	params = ft_strsplit(str, ' ');
@@ -172,6 +174,7 @@ void	ft_valid(t_lem *in, int fd)
 	{
 		mass_rooms[coun]->r_name = NULL;
 		mass_rooms[coun]->next_room = NULL;
+		mass_rooms[coun]->right_way = 1;
 		//mass_rooms[coun]->link = NULL;
 		coun++;
 	}
