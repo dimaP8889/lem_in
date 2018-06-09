@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/06 13:29:49 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/10 01:50:28 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	ft_check_num(t_lem *in, int fd)
 		ft_exit();
 }
 
-void	ft_valid(t_lem *in, int fd)
+t_room			**ft_valid(t_lem *in, int fd)
 {
 	t_lem 	*lol;
 	t_room	**mass_rooms;
@@ -174,12 +174,18 @@ void	ft_valid(t_lem *in, int fd)
 	{
 		mass_rooms[coun]->r_name = NULL;
 		mass_rooms[coun]->next_room = NULL;
-		mass_rooms[coun]->right_way = 1;
-		//mass_rooms[coun]->link = NULL;
+		mass_rooms[coun]->right_way = 0;
+		mass_rooms[coun]->use = 0;
+		mass_rooms[coun]->left_way = 0;
+		mass_rooms[coun]->use_bk = 0;
+		mass_rooms[coun]->length = 0;
+		mass_rooms[coun]->length_cp = 0;
+		mass_rooms[coun]->length_bk = 0;
+		mass_rooms[coun]->length_bk_cp = 0;
 		coun++;
 	}
 	ft_make_links(mass_rooms, fd, str);
-	coun = 0;
+	return (mass_rooms);
 	// while (mass_rooms[coun])
 	// {
 	// 	ft_printf("%s ", mass_rooms[coun]->name);

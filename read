@@ -1,18 +1,63 @@
+name : 0
+len : 0
+len_bk : 4
+right_way : 1
+left_way : 1
+use : 0
+num->next : 5
 
 name : 1
+len : 4
+len_bk : 0
+right_way : 1
+left_way : 1
+use : 1
+num->next : 3
 
 name : 2
+len : 2
+len_bk : 2
+right_way : 1
+left_way : 1
+use : 1
+num->next : 5
+num->next : 3
 
 name : 3
+len : 3
+len_bk : 1
+right_way : 1
+left_way : 1
+use : 1
+num->next : 2
+num->next : 6
+num->next : 1
 
+name : 4
+len : 2
+len_bk : 3
+right_way : 0
+left_way : 0
+use : 1
+num->next : 5
+num->next : 6
 
 name : 5
+len : 1
+len_bk : 3
+right_way : 1
+left_way : 1
+use : 1
+num->next : 2
+num->next : 4
+num->next : 0
 
 name : 6
+len : 3
+len_bk : 2
+right_way : 0
+left_way : 0
+use : 1
+num->next : 4
+num->next : 3
 
-
-
-
-fin: 1
-count :6
-testtesttesttesttesttesttesttesttesttest

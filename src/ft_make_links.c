@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_links.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/06 20:42:52 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/06/10 00:15:49 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ void	ft_print_room(t_room **mass_rooms)
 		{
 			ft_printf("name : %s\n", mass_rooms[count]->name);
 			ft_printf("len : %i\n", mass_rooms[count]->length);
+			ft_printf("len_bk : %i\n", mass_rooms[count]->length_bk);
 			ft_printf("right_way : %i\n", mass_rooms[count]->right_way);
+			ft_printf("left_way : %i\n", mass_rooms[count]->left_way);
+			ft_printf("use : %i\n", mass_rooms[count]->use);
 			while (mass_rooms[count]->r_name)
 			{
 				ft_printf("num->next : %i\n", mass_rooms[count]->r_name->num);
@@ -141,6 +144,6 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 	ft_make_graph(mass_rooms_cp, links_cp);
 	//ft_print_room(mass_rooms_cp);
 	ft_put_len(mass_rooms_cp);
-	//ft_find_ways(mass_rooms_cp);
+	ft_find_ways(mass_rooms_cp);
 	ft_print_room(mass_rooms);
 }

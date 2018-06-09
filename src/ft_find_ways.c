@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_ways.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 10:28:50 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/06 20:46:33 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/06/10 01:38:56 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_find_start(t_room **mass_rooms)
+int		ft_find_star(t_room **mass_rooms)
 {
 	int		count;
 
@@ -22,23 +22,42 @@ int		ft_find_start(t_room **mass_rooms)
 	return (count);
 }
 
-void	ft_get_ways(t_room **mass_rooms, int count)
+int		ft_find_fin(t_room **mass_rooms)
 {
+	int		count;
+
+	count = 0;
+	while (!mass_rooms[count]->fin)
+		count++;
+	return (count);
+}
+
+int		ft_count_ways(t_room **mass_rooms, int count)
+{
+	int		num;
 	t_name *room;
 
 	room = mass_rooms[count]->r_name;
+	num = 0;
 	while (room)
 	{
-		room->use = 0;
-		ft_get_ways(mass_rooms, room->num);
+		num++;
 		room = room->next;
 	}
+	return (num);
 }
 
 void	ft_find_ways(t_room **mass_rooms)
 {
-	int		count;
+	int		start;
+	int		fin;
+	int		count_ways_start;
+	int		count_ways_finish;
 
-	count = ft_find_start(mass_rooms);
-	ft_get_ways(mass_rooms, count);
+	start = ft_find_star(mass_rooms);
+	fin = ft_find_fin(mass_rooms);
+	count_ways_start = ft_count_ways(mass_rooms, fin);
+	count_ways_finish = ft_count_ways(mass_rooms, start);
+	ft_start_way(mass_rooms, start, fin, count_ways_start);
+	ft_finish_way(mass_rooms, start, fin, count_ways_finish);
 }

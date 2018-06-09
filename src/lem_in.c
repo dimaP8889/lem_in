@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:22 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/05/23 18:20:26 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/06/10 01:49:34 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int		main()
 
 	in = (t_lem *)malloc(sizeof(t_lem));
 	fd = open("src/read", O_RDONLY);
-	ft_valid(in, fd);
+	in->rooms = ft_valid(in, fd);
+	ft_print_room(in->rooms);
 }

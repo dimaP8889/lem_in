@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 19:16:55 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/06 12:57:27 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/10 00:19:31 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_name	*ft_make_first(int count)
 
 	name = (t_name *)malloc(sizeof(t_name));
 	name->use = 0;
+	name->use_bk = 0;
 	name->num = count;
 	name->next = NULL;
 	return (name);
