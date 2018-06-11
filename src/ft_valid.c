@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:15:40 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/10 01:50:28 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/10 13:38:42 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ t_room			**ft_valid(t_lem *in, int fd)
 		mass_rooms[coun]->r_name = NULL;
 		mass_rooms[coun]->next_room = NULL;
 		mass_rooms[coun]->right_way = 0;
+		mass_rooms[coun]->free = 1;
+		mass_rooms[coun]->ants = 0;
 		mass_rooms[coun]->use = 0;
 		mass_rooms[coun]->left_way = 0;
 		mass_rooms[coun]->use_bk = 0;

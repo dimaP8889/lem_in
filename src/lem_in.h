@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/10 01:49:05 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/11 01:15:43 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ typedef	struct		s_links
 	struct s_links	*next;
 }					t_links;
 
+typedef	struct		s_ants
+{
+	int				num;
+	int				change;
+	char			*name;
+	struct s_ants	*next;
+}					t_ants;
+
 typedef	struct		s_room
 {
 	char			*name;
 	int				x;
 	int				y;
-	int				near_start;
+	int				ants;
 	int				right_way;
 	int				left_way;
 	int				free;
@@ -62,6 +70,7 @@ typedef	struct		s_lem
 	t_room			**rooms;
 }					t_lem;
 
+
 t_room	**ft_valid(t_lem *in, int fd);
 void	ft_make_links(t_room **mass_rooms, int fd, char *str);
 void	ft_put_len(t_room **mass_rooms_cp);
@@ -72,6 +81,9 @@ void	ft_finish_way(t_room **mass_rooms, int start, int fin, int count_ways);
 int		ft_find_len(t_room **mass_rooms);
 int		ft_find_len_bk(t_room **mass_rooms);
 void	ft_print_room(t_room **mass_rooms);
+int		ft_find_start(t_room **mass_rooms);
+int		ft_find_finish(t_room **mass_rooms);
+void	ft_move_ants(int num_ants, t_room **mass_rooms);
 void	ft_exit();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:31:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/10 00:15:49 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/10 20:08:26 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,5 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str)
 	//ft_print_room(mass_rooms_cp);
 	ft_put_len(mass_rooms_cp);
 	ft_find_ways(mass_rooms_cp);
-	ft_print_room(mass_rooms);
+	//ft_print_room(mass_rooms);
 }
