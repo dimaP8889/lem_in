@@ -6,7 +6,7 @@
 /*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 10:28:50 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/12 17:02:16 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/06/12 20:31:04 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_count_ways(t_room **mass_rooms, int count)
 	while (room)
 	{
 		num++;
-		ft_printf("%s\n", mass_rooms[room->num]->name);
+		//ft_printf("%s\n", mass_rooms[room->num]->name);
 		room = room->next;
 	}
 	return (num);
@@ -40,7 +40,7 @@ void	ft_find_ways(t_room **mass_rooms)
 	//ft_print_room(mass_rooms);
 	//count_ways_start = ft_count_ways(mass_rooms, fin);
 	count_ways_finish = ft_count_ways(mass_rooms, fin);
-	ft_printf("%i\n", count_ways_finish);
+	//ft_printf("%i\n", count_ways_finish);
 	//ft_start_way(mass_rooms, start, fin, count_ways_start);
 	ft_finish_way(mass_rooms, start, fin, count_ways_finish);
 }

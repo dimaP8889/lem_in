@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:02:27 by dpogrebn          #+#    #+#             */
-/*   Updated: 2018/06/11 01:15:43 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 19:45:18 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef	struct		s_room
 	char			*name;
 	int				x;
 	int				y;
+	int				length_way;
 	int				ants;
-	int				right_way;
+	int				move;
 	int				left_way;
 	int				free;
 	int				use;
@@ -54,7 +55,6 @@ typedef	struct		s_room
 	int				start;
 	int				fin;
 	int				length;
-	int				length_cp;
 	int				length_bk;
 	int				length_bk_cp;
 	struct s_room	*next_room;
@@ -76,9 +76,7 @@ void	ft_make_links(t_room **mass_rooms, int fd, char *str);
 void	ft_put_len(t_room **mass_rooms_cp);
 void	ft_make_graph(t_room **mass_rooms, t_links *links);
 void	ft_find_ways(t_room **mass_rooms);
-void	ft_start_way(t_room **mass_rooms, int start, int fin, int count_ways);
 void	ft_finish_way(t_room **mass_rooms, int start, int fin, int count_ways);
-int		ft_find_len(t_room **mass_rooms);
 int		ft_find_len_bk(t_room **mass_rooms);
 void	ft_print_room(t_room **mass_rooms);
 int		ft_find_start(t_room **mass_rooms);

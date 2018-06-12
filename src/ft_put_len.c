@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 19:17:54 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/10 00:19:06 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 21:12:28 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_set_len(t_room **mass_rooms, int count, int len)
 
 	//ft_printf("room: %i\n", count);
 	room = mass_rooms[count]->r_name;
+	//ft_printf("room %i\n", room->num);
 	if (len < mass_rooms[count]->length || !mass_rooms[count]->length)
 	{
 		mass_rooms[count]->length = len;
-		mass_rooms[count]->length_cp = len;
 		room->use = 0;
 	}
 	if (room->use)
@@ -40,6 +40,7 @@ void	ft_set_len_bk(t_room **mass_rooms, int count, int len)
 
 	//ft_printf("room: %i\n", count);
 	room = mass_rooms[count]->r_name;
+	if (!room)
 	if (len < mass_rooms[count]->length_bk || !mass_rooms[count]->length_bk)
 	{
 		mass_rooms[count]->length_bk = len;
@@ -47,7 +48,9 @@ void	ft_set_len_bk(t_room **mass_rooms, int count, int len)
 		room->use_bk = 0;
 	}
 	if (room->use_bk)
+	{
 		return;	
+	}
 	while (room)
 	{
 		room->use_bk = 1;
@@ -86,9 +89,9 @@ void	ft_put_len(t_room **mass_rooms_cp)
 	count = ft_find_start(mass_rooms);
 	count_fin = ft_find_finish(mass_rooms);
 	ft_set_len(mass_rooms, count, 0);
+	ft_printf("room %i\n", mass_rooms[2]->r_name->num);
 	ft_set_len_bk(mass_rooms, count_fin, 0);
 	mass_rooms[count]->length = 0;
-	mass_rooms[count]->length_cp = 0;
 	mass_rooms[count_fin]->length_bk = 0;
 	mass_rooms[count_fin]->length_bk_cp = 0;
 }
