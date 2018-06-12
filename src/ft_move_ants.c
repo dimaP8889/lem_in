@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 13:19:33 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/11 01:16:48 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:34:38 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	ft_check_near(t_room **mass_rooms, int num, t_ants *ants_cp)
 				next_num = ft_find_free(mass_rooms[count]->r_name, mass_rooms, num);
 				if (next_num != -1)
 				{
-					//ft_printf("num : %i\n", count);
-					//ft_printf("next_num : %i\n", next_num);
 					mass_rooms[next_num]->free = 0;
 					ft_change_room(ants, mass_rooms[next_num]->name, mass_rooms[count]->name);
 					if (mass_rooms[next_num]->fin)
@@ -108,28 +106,17 @@ t_ants 	*ft_start(t_name *room, t_room **mass_rooms, int start, t_ants *ants)
 {
 	static	int	ant;
 
-	//ant_cp = ants;
 	if (!ant)
 		ant = 1;
-	//ft_printf("%i\n", mass_rooms[start]->ants);
 	while (room && mass_rooms[start]->ants)
 	{
-		//ft_printf("test\n");
 		if ((mass_rooms[room->num]->left_way || mass_rooms[room->num]->right_way) 
 		&& mass_rooms[room->num]->free)
 		{
-			//ft_printf("test\n");
 			if (!ants)
-			{
-				//ft_printf("test\n");
 				ants = ft_make_ant(mass_rooms[room->num]->name, ant);
-			}
 			else
-			{
-				//ft_printf("num_ant :%i\n", ant);
 				ants = ft_make_next_ant(mass_rooms[room->num]->name, ant, ants);
-				//ft_printf("num_ant :%i\n", ants->num);
-			}
 			mass_rooms[start]->ants--;
 			mass_rooms[room->num]->free = 0;
 			ant++;
@@ -139,19 +126,51 @@ t_ants 	*ft_start(t_name *room, t_room **mass_rooms, int start, t_ants *ants)
 	return (ants);
 }
 
-void	ft_print_ants(t_ants *ants) // make right OUT
+t_ants	*ft_delete_ant(t_ants *ants_cp, char *finish)
 {
+	t_ants	*ants;
+
+	ants = ants_cp;
+	if (!ft_strcmp(ants->name, finish))
+	{
+		ants_cp = ants_cp->next;
+	}
+	else
+	{
+		while (ants->next)
+		{
+			if (!ft_strcmp(ants->next->name, finish))
+			{
+				if (ants->next->next)
+					ants->next = ants->next->next;
+				else
+					ants->next = NULL;
+			}
+		}
+	}
+	return (ants_cp);
+}
+
+t_ants 	*ft_print_ants(t_ants *ants_cp, char *finish)
+{
+	t_ants	*ants;
+
+	ants = ants_cp;
 	while (ants)
 	{
 		ft_printf("L%i-", ants->num);
-		ft_printf("%s ", ants->name);
+		ft_printf("%s ", ants->name); 
+		if (!ft_strcmp(ants->name, finish))
+		{
+			ants_cp = ft_delete_ant(ants_cp, ants->name);
+		}
 		ants = ants->next;
 	}
 	ft_printf("\n");
+	return (ants_cp);
 }
 t_ants 	*ft_one_move(t_room **mass_rooms, int start, int moves, t_ants *ants)
 {
-	//ft_printf("moves %i\n", moves);
 	while (moves)
 	{
 		ft_check_near(mass_rooms, moves, ants);
@@ -160,7 +179,6 @@ t_ants 	*ft_one_move(t_room **mass_rooms, int start, int moves, t_ants *ants)
 	if (!moves)
 	{
 		ants = ft_start(mass_rooms[start]->r_name, mass_rooms, start, ants);
-		//ft_print_ants(ants);
 	}
 	return (ants);
 }	
@@ -180,12 +198,10 @@ void	ft_move_ants(int num_ants, t_room **mass_rooms)
 	mass_rooms[start]->ants = num_ants;
 	while (mass_rooms[finish]->ants < num_ants)
 	{
-		//ft_printf("move :%i\n", moves);
 		if (moves > mass_rooms[finish]->length)
 			moves = mass_rooms[finish]->length;
 		ants = ft_one_move(mass_rooms, start, moves, ants);
-		ft_print_ants(ants);
+		ants = ft_print_ants(ants, mass_rooms[finish]->name);
 		moves++;
-		//mass_rooms[finish]->ants++;
 	}
 }

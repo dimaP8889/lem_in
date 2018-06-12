@@ -6,7 +6,7 @@
 /*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 01:23:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/10 01:41:34 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:38:21 by dmitriy1         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_set_length_bk(t_room **mass_rooms, int count, int len)
 		mass_rooms[count]->length_bk_cp = len;
 		room->use_bk = 0;
 	}
+		ft_printf("lol");
 	if (room->use_bk == 1)
 		return;
 	while (room)
