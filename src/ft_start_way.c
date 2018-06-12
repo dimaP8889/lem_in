@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_start_way.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 01:23:06 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/10 01:42:08 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:32:18 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,18 @@ void	ft_set_length(t_room **mass_rooms, int count, int len)
 		mass_rooms[count]->length_cp = len;
 		room->use = 0;
 	}
-	if (room->use == 1)
+	if (room->use)
+	{
 		return;
+	}
 	while (room)
 	{
-		while (room && mass_rooms[room->num]->right_way)
+		while (room && mass_rooms[room->num]->right_way /*&& room->use*/)
 			room = room->next;
 		if (!room)
+		{
 			return;
+		}
 		room->use = 1;
 		ft_set_length(mass_rooms, room->num, len + 1);
 		room = room->next;

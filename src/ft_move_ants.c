@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_move_ants.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 13:19:33 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/12 14:34:38 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 16:46:14 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,20 @@ int		ft_find_free(t_name *room, t_room **mass_rooms, int len)
 {
 	while (room)
 	{
+		// ft_printf("left :%i\n", mass_rooms[room->num]->left_way);
+		// ft_printf("right :%i\n", mass_rooms[room->num]->right_way);
+		// ft_printf("free :%i\n", mass_rooms[room->num]->free);
+		// ft_printf("start :%i\n", mass_rooms[room->num]->start);
+		// ft_printf("len_rm :%i\n", mass_rooms[room->num]->length);
+		// ft_printf("len :%i\n", len);
+		// ft_printf("\n");
 		if ((mass_rooms[room->num]->left_way || mass_rooms[room->num]->right_way) 
 		&& mass_rooms[room->num]->free && !mass_rooms[room->num]->start 
 		&& mass_rooms[room->num]->length > len)
 			return (room->num);
 		room = room->next;
 	}
+	//ft_printf("ret -1 :\n");
 	return (-1);
 }
 
@@ -126,31 +134,6 @@ t_ants 	*ft_start(t_name *room, t_room **mass_rooms, int start, t_ants *ants)
 	return (ants);
 }
 
-t_ants	*ft_delete_ant(t_ants *ants_cp, char *finish)
-{
-	t_ants	*ants;
-
-	ants = ants_cp;
-	if (!ft_strcmp(ants->name, finish))
-	{
-		ants_cp = ants_cp->next;
-	}
-	else
-	{
-		while (ants->next)
-		{
-			if (!ft_strcmp(ants->next->name, finish))
-			{
-				if (ants->next->next)
-					ants->next = ants->next->next;
-				else
-					ants->next = NULL;
-			}
-		}
-	}
-	return (ants_cp);
-}
-
 t_ants 	*ft_print_ants(t_ants *ants_cp, char *finish)
 {
 	t_ants	*ants;
@@ -159,10 +142,15 @@ t_ants 	*ft_print_ants(t_ants *ants_cp, char *finish)
 	while (ants)
 	{
 		ft_printf("L%i-", ants->num);
-		ft_printf("%s ", ants->name); 
-		if (!ft_strcmp(ants->name, finish))
+		ft_printf("%s ", ants->name);
+		if (ants->next && !ft_strcmp(ants->next->name, finish))
 		{
-			ants_cp = ft_delete_ant(ants_cp, ants->name);
+			ft_printf("L%i-", ants->next->num);
+			ft_printf("%s ", ants->next->name);
+			if (ants->next->next)
+				ants->next = ants->next->next;
+			else
+				ants->next = NULL;
 		}
 		ants = ants->next;
 	}

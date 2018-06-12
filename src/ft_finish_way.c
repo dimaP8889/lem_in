@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_finish_way.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmitriy1 <dmitriy1@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 01:23:24 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/12 14:38:21 by dmitriy1         ###   ########.fr       */
+/*   Updated: 2018/06/12 16:52:43 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,34 @@ void	ft_set_length_bk(t_room **mass_rooms, int count, int len)
 		mass_rooms[count]->length_bk_cp = len;
 		room->use_bk = 0;
 	}
-		ft_printf("lol");
 	if (room->use_bk == 1)
+	{
 		return;
+	}
+	//if (count == 6)
+	//{
+		// ft_printf("cnt_ch : %i ", count);
+		// ft_printf("num_ch :%i ", room->num);
+		// ft_printf("use_ch : %i ", room->use_bk);
+	//}
 	while (room)
 	{
-		while (room && (mass_rooms[room->num]->left_way))
+		while (room && (mass_rooms[room->num]->left_way) /*&& room->use_bk*/)
+		{
+			//ft_printf("test\n");
 			room = room->next;
+		}
 		if (!room)
+		{
 			return;
+		}
 		room->use_bk = 1;
+		// if (room->num == 6)
+		// {
+			// ft_printf("cnt : %i ", count);
+			// ft_printf("num %i ", room->num);
+			// ft_printf("use : %i \n\n", room->use_bk);
+		//}
 		ft_set_length_bk(mass_rooms, room->num, len + 1);
 		room = room->next;
 	}
