@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_len.c                                      :+:      :+:    :+:   */
+/*   ft_check_rights.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/10 01:34:06 by dmitriy1          #+#    #+#             */
-/*   Updated: 2018/06/12 19:38:52 by dpogrebn         ###   ########.fr       */
+/*   Created: 2018/06/15 14:42:47 by dpogrebn          #+#    #+#             */
+/*   Updated: 2018/06/15 14:45:48 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		ft_find_len_bk(t_room **mass_rooms)
+void	ft_check_same_coord(t_room *room, t_room **mass_rooms, int coord)
 {
 	int		count;
-	int		len;
 
-	len = 0;
 	count = 0;
 	while (mass_rooms[count])
 	{
-		if (mass_rooms[count]->length_bk_cp > len)
-			len = mass_rooms[count]->length_bk_cp;
+		if ((room->x == mass_rooms[count]->x && room->y == mass_rooms[count]->y)
+		|| !ft_strcmp(room->name, mass_rooms[count]->name))
+			if (count != coord)
+				ft_exit();
 		count++;
 	}
-	return (len);
+}
+
+void	ft_check_rights(t_room **mass_rooms)
+{
+	int		count;
+
+	count = 0;
+	while (mass_rooms[count])
+	{
+		ft_check_same_coord(mass_rooms[count], mass_rooms, count);
+		count++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpogrebn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpogrebn <dpogrebn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:43:41 by dpogrebn          #+#    #+#             */
-/*   Updated: 2017/11/07 17:43:42 by dpogrebn         ###   ########.fr       */
+/*   Updated: 2018/06/14 18:19:18 by dpogrebn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,22 @@ char			**ft_strsplit(char const *s, char c)
 	int		i;
 	int		coun;
 
-	if (s)
+	if (!s)
+		return (NULL);
+	coun = count(s, c);
+	split = (char **)malloc(sizeof(char *) * (coun));
+	if (split == NULL)
+		return (NULL);
+	split1 = split;
+	while (--coun > 0)
 	{
-		coun = count(s, c);
-		split = (char **)malloc(sizeof(char *) * (coun));
-		if (split == NULL)
-			return (NULL);
-		split1 = split;
-		while (--coun > 0)
-		{
-			i = 0;
-			str = make_word(s, &i, c);
-			*split = ft_strdup(str);
-			split++;
-			s = s + i;
-		}
-		*split = 0;
-		return (split1);
+		i = 0;
+		str = make_word(s, &i, c);
+		*split = ft_strdup(str);
+		free(str);
+		split++;
+		s = s + i;
 	}
-	return (NULL);
+	*split = 0;
+	return (split1);
 }
